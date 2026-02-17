@@ -97,3 +97,8 @@ window.buildFull = async()=>{
   macro.push({fullBuild:{prompt, modules:modulesSelected, url:deployed.url}});
   await fetch("http://localhost:3000/api/record",{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(macro)});
 };
+window.syncRepo = async()=>{
+  const r = await fetch("http://localhost:3000/api/repo/sync");
+  const data = await r.json();
+  alert("Repo status: "+data.status);
+};
