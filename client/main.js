@@ -51,3 +51,11 @@ window.build = async()=>{
 };
 
 loadModules();
+import { makeDraggable } from "./dragDrop.js";
+
+// ตัวอย่างให้ทุก element ที่สร้างสามารถลากได้
+NanoFrame.mount(data.html);
+data.html.split('><').forEach((_,i)=>{
+  const el = document.querySelectorAll('*')[i];
+  if(el) makeDraggable(el);
+});
