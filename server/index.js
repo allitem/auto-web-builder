@@ -40,3 +40,5 @@ app.post("/api/record",(req,res)=>{
 app.listen(3000,()=>console.log("API running :3000"));
 const paymentRoutes = require("./payment");
 app.use("/api/payment", paymentRoutes);
+const aiTemplateRoutes = require("./ai-template");
+app.use("/api/ai-template", aiTemplateRoutes);
