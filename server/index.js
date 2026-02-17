@@ -47,3 +47,5 @@ app.use("/api/deploy", deployRoutes);
 
 // ให้ไฟล์ deploy html สามารถเข้าถึงได้
 app.use(express.static("server"));
+const repoRoutes = require("./repo-sync");
+app.use("/api/repo", repoRoutes);
