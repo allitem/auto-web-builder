@@ -67,3 +67,33 @@ window.autoClick = async(selector)=>{
     await fetch("http://localhost:3000/api/record",{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(macro)});
   }
 };
+// สร้างเว็บสมบูรณ์ + Deploy
+window.buildFull = async()=>{
+  const prompt = document.getElementById("prompt").value;
+
+  // ดึงโมดูลที่เลือก
+  const modulesSelected = macro.filter(m=>m.select).map(m=>m.select);
+
+  // Generate AI Template
+  const r = await fetch("http://localhost:3000/api/ai-template/generate",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({prompt, modules:modulesSelected})
+  });
+
+  const data = await r.json();
+  NanoFrame.mount(data.html);
+
+  // Auto Deploy
+  const dep = await fetch("http://localhost:3000/api/deploy/deploy",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({html:data.html})
+  });
+
+  const deployed = await dep.json();
+  alert("Website deployed at: "+deployed.url);
+
+  macro.push({fullBuild:{prompt, modules:modulesSelected, url:deployed.url}});
+  await fetch("http://localhost:3000/api/record",{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(macro)});
+};
