@@ -59,3 +59,11 @@ data.html.split('><').forEach((_,i)=>{
   const el = document.querySelectorAll('*')[i];
   if(el) makeDraggable(el);
 });
+window.autoClick = async(selector)=>{
+  const el = document.querySelector(selector);
+  if(el){ 
+    el.click();
+    macro.push({action:"click", selector});
+    await fetch("http://localhost:3000/api/record",{method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(macro)});
+  }
+};
