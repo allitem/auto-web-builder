@@ -1,1 +1,12 @@
-
+[
+  {
+    "id":"free-blog",
+    "name":"Free Blog Module",
+    "price":0
+  },
+  {
+    "id":"shop-pro",
+    "name":"Shop Pro",
+    "price":49
+  }
+]
